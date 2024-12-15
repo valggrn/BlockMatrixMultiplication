@@ -10,8 +10,9 @@ if __name__ == '__main__':
         raise ValueError("Не достаточно аргументов")
     name = sys.argv[1]
     size = int(sys.argv[2])
+    if size % 2 != 0:
+        raise ValueError("Размер матриц должен быть кратен 2")
     A = generate_matrix(size)
     B = generate_matrix(size)
     save_matrix_to_file(f"./matrix/{name}/A.npy", A)
     save_matrix_to_file(f"./matrix/{name}/B.npy", B)
-    save_matrix_to_file(f"./matrix/{name}/C.npy", np.zeros((size, size)))

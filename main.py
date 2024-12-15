@@ -20,8 +20,8 @@ for script in scripts:
         argv.append(str(arg))
     try:
         process = subprocess.run(argv, check=True)
-    except subprocess.CalledProcessError as e:
-        print(f"Ошибка выполнения {script}: {e}")
+    except subprocess.CalledProcessError:
+        break
 
 end = time.time()
 print(f"{end - start} сек.")
