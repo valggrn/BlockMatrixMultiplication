@@ -1,21 +1,14 @@
 import sys
-from work_files import get_matrix
+from matrix_utils import get_matrix_from_file
 from numpy import dot, allclose
-import logging
-
-logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
 
 if __name__ == '__main__':
     if len(sys.argv) < 2:
-        raise ValueError("Not enough arguments.")
+        raise ValueError("Не достаточно аргументов")
     name = sys.argv[1]
-    A = get_matrix(f"./source/{name}/A.npy")
-    B = get_matrix(f"./source/{name}/B.npy")
-    C = get_matrix(f"./result/{name}/C.npy")
-    logging.info("The matrices got")
+    A = get_matrix_from_file(f"./matrix/{name}/A.npy")
+    B = get_matrix_from_file(f"./matrix/{name}/B.npy")
+    C = get_matrix_from_file(f"./matrix/{name}/C.npy")
     new_C = dot(A, B)
-    logging.info("The matrix got by multiplication")
-    if allclose(C, new_C, atol=1e-10):
-        print("Done")
-    else:
-        print("Wrong")
+    if not allclose(C, new_C, atol=1e-10):
+        raise ValueError("Матрицы не равны")
